@@ -34,9 +34,19 @@ class OPDController extends Controller
             'nama' => 'required',
             'slug' => 'required|unique:opds',
             'link' => 'nullable|url',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        OPD::create($request->only(['nama', 'slug', 'link']));
+        $data = $request->only(['nama', 'slug', 'link']);
+
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $filename = time() .'_' . $file->getClientOriginalName();
+            $file->move(public_path('logos'), $filename);
+            $data['logo'] = 'logos/' . $filename; 
+        }
+
+        OPD::create($data);
 
         return redirect()->route('admin.opds.index')->with('success', 'OPD berhasil ditambahkan');
     }
@@ -66,9 +76,24 @@ class OPDController extends Controller
             'nama' => 'required',
             'slug' => 'required|unique:opds,slug,' . $opd->id,
             'link' => 'nullable|url',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $opd->update($request->only(['nama', 'slug', 'link']));
+        $data = $request->only(['nama', 'slug', 'link']);
+
+        if ($request->hasFile('logo')) {
+            // Hapus logo lama jika ada
+            if ($opd->logo && file_exists(public_path($opd->logo))) {
+                unlink(public_path($opd->logo));
+            }
+        }
+
+        $file = $request->file('logo');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('logos'), $filename);
+        $data['logo'] = 'logos/' . $filename;
+
+        $opd->update($data);
 
         return redirect()->route('admin.opds.index')->with('success', 'OPD berhasil diperbarui.');
     }
@@ -78,6 +103,14 @@ class OPDController extends Controller
      */
     public function destroy(OPD $opd)
     {
+
+        // Hapus file logo jika ada
+        if ($opd->logo && file_exists(public_path($opd->logo))) {
+            unlink(public_path($opd->logo));
+        }
+
+        $opd->delete();
+
         $opd->delete();
         return redirect()->route('admin.opds.index')->with('success', 'OPD berhasil dihapus.');
     }

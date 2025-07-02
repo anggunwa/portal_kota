@@ -14,6 +14,7 @@
                 <th>Nama</th>
                 <th>Slug</th>
                 <th>Link</th>
+                <th>Logo</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -24,6 +25,13 @@
                     <td>{{ $opd->nama }}</td>
                     <td>{{ $opd->slug }}</td>
                     <td><a href="{{ $opd->link }}" target="_blank">{{ $opd->link }}</a></td>
+                    <td>
+                        @if($opd->logo)
+                            <img src="{{ asset($opd->logo) }}" alt="Logo {{ $opd->name }}" width="50">
+                        @else
+                            -
+                        @endif                
+                    </td>
                     <td>
                         <a href="{{ route('admin.opds.edit', $opd->id) }}">Edit</a> | 
                         <form action="{{ route('admin.opds.destroy', $opd->id) }}" method="POST" style="display:inline">
