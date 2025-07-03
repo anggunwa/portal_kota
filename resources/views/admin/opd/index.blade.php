@@ -1,49 +1,50 @@
-@extends('layouts.app')
+<x-app-layout>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">Manajemen OPD (admin)</h2>
 
-@section('title', 'Daftar OPD (Admin)')
-
-@section('content')
-    <h2>Manajemen OPD</h2>
-
-    <a href="{{ route('admin.opds.create') }}">+ Tambah OPD Baru</a>
-
-    <table border="1" cellpadding="8" cellspacing="0" style="margin-top: 20px; width: 100%; background: white;">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Slug</th>
-                <th>Link</th>
-                <th>Logo</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($opds as $index => $opd)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $opd->nama }}</td>
-                    <td>{{ $opd->slug }}</td>
-                    <td><a href="{{ $opd->link }}" target="_blank">{{ $opd->link }}</a></td>
-                    <td>
-                        @if($opd->logo)
-                            <img src="{{ asset($opd->logo) }}" alt="Logo {{ $opd->name }}" width="50">
-                        @else
-                            -
-                        @endif                
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.opds.edit', $opd->id) }}">Edit</a> | 
-                        <form action="{{ route('admin.opds.destroy', $opd->id) }}" method="POST" style="display:inline">
-                            @csrf
-                            @method('DELETE')
-                            <button onclick="return confirm('Hapus OPD ini?')">Hapus</button>
-                        </form>
-                    </td>
+    <div class="py-4 px-6">
+        <a href="{{ route('admin.opds.create') }}" class="text-blue-500 hover:underline">+ Tambah OPD Baru</a>
+    
+        <table class="mt-4 w-full bg-white border">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="px-3 py-2">No</th>
+                    <th class="px-3 py-2">Nama</th>
+                    <th class="px-3 py-2">Slug</th>
+                    <th class="px-3 py-2">Link</th>
+                    <th class="px-3 py-2">Logo</th>
+                    <th class="px-3 py-2">Aksi</th>
                 </tr>
-            @empty
-                <tr><td colspan="5">Belum ada data OPD.</td></tr>
-            @endforelse    
-        </tbody>
-    </table>
-@endsection
+            </thead>
+            <tbody>
+                @forelse ($opds as $index => $opd)
+                    <tr class="text-gray-700">
+                        <td class="px-3 py-2">{{ $index + 1 }}</td>
+                        <td class="px-3 py-2">{{ $opd->nama }}</td>
+                        <td class="px-3 py-2">{{ $opd->slug }}</td>
+                        <td class="px-3 py-2">
+                            <a href="{{ $opd->link }}" class="text-blue-500 hover:underline" target="_blank">{{ $opd->link }}</a>
+                        </td>
+                        <td class="px-3 py-2">
+                        <!-- Logo -->
+                            @if ($opd->logo)
+                                <img src="{{ asset($opd->logo) }}" alt="Logo {{ $opd->nama }}" class="h-10 mx-auto">
+                            @else
+                                <span class="text-gray-400">-</span>
+                            @endif
+                            </td>
+                        <td class="px-3 py-2">
+                            <a href="{{ route('admin.opds.edit', $opd->id) }}" class="text-green-500">Edit</a> | 
+                            <form action="{{ route('admin.opds.destroy', $opd->id) }}" method="POST" style="display:inline">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-red-500" onclick="return confirm('Hapus OPD ini?')">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr><td colspan="5" class="text-center py-4">Belum ada data OPD.</td></tr>
+                @endforelse    
+            </tbody>
+        </table>
+    </div>
+</x-app-layout>

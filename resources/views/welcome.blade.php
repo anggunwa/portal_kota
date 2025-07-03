@@ -4,72 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Layanan Kota</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background: #f3f3f3;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .card img {
-            width: 80px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .card a {
-            display: inline-block;
-            margin-top: 10px;
-            text-decoration: none;
-            color: white;
-            background: #3490dc;
-            padding: 6px 12px;
-            border-radius: 5px;
-        }
-
-        .card a:hover {
-            background: #2779bd;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 font-sans antialiased">
     
-        <h1>Portal Layanan Kota</h1>
+    <div class="max-w-7xl mx-auto py-10 px-4">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Portal Layanan Kota</h1>
 
-        <div class="grid">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @forelse ($opds as $opd)
-                <div class="card">
-                @if ($opd->logo)
-                    <img src="{{ asset($opd->logo) }}" alt="Logo {{ $opd->nama }}">
-                @else
-                    <div style="font-size: 50px;">❔</div>
-                @endif
-                <h3>{{ $opd->nama }}</h3>
-                <a href="{{ $opd->link }}" target="_blank">Kunjungi Situs</a>
+                <div class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center justify-between h-full">
+                    @if ($opd->logo)
+                        <img src="{{ asset($opd->logo) }}" alt="Logo {{ $opd->nama }}" class="h-24 object-contain mb-4">
+                    @else
+                        <div class="text-gray-300 text-6xl mb-4">❔</div>
+                    @endif
+
+                    <h3 class="text-center font-semibold text-lg text-gray-700 mb-3">{{ $opd->nama }}</h3>
+                    
+                    @if ($opd->link)
+                        <a href="{{ $opd->link }}" target="_blank" class="mt-auto inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Kunjungi Situs</a>
+                    @endif
                 </div>
             @empty
-                <p>Belum ada data OPD</p>
+                <p class="col-span-full text-center text-gray-500">Belum ada data OPD</p>
             @endforelse
         </div>
+    </div>
 
 </body>
 </html>
