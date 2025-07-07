@@ -7,8 +7,8 @@ use App\Http\Controllers\Admin\OPDController;
 
 Route::get('/', function () {
     $opds= OPD::all();
-    return view('welcome', compact(('opds')));
-});
+    return view('frontend.index', compact(('opds')));
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
