@@ -86,12 +86,12 @@ class OPDController extends Controller
             if ($opd->logo && file_exists(public_path($opd->logo))) {
                 unlink(public_path($opd->logo));
             }
+        
+            $file = $request->file('logo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('logos'), $filename);
+            $data['logo'] = 'logos/' . $filename;
         }
-
-        $file = $request->file('logo');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('logos'), $filename);
-        $data['logo'] = 'logos/' . $filename;
 
         $opd->update($data);
 

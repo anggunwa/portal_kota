@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">Manajemen OPD (admin)</h2>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-10 px-6">Manajemen OPD (admin)</h2>
 
     <div class="py-4 px-6">
         <a href="{{ route('admin.opds.create') }}" class="text-blue-500 hover:underline">+ Tambah OPD Baru</a>
