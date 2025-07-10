@@ -15,7 +15,7 @@ class LayananController extends Controller
     public function index()
     {
         $layanans = Layanan::with('opd')->latest()->get();
-        return view('admin.layanan.index', compact('layanans'));
+        return view('admin.layanans.index', compact('layanans'));
     }
 
     /**
@@ -24,7 +24,7 @@ class LayananController extends Controller
     public function create()
     {
         $opds = OPD::all(); // untuk dropdown pilihan OPD
-        return view('admin.layanan.create', compact('opds'));
+        return view('admin.layanans.create', compact('opds'));
     }
 
     /**
@@ -34,8 +34,8 @@ class LayananController extends Controller
     {
         $request->validate([
             'opd_id' => 'required|exist:opds,id',
-            'nama_layanan' => 'required',
-            'deskripsi' => 'nullable',
+            'nama_layanan' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'link' => 'nullable|url'
         ]);
 

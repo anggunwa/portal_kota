@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\OPD;
 use App\Http\Controllers\Admin\OPDController;
+use App\Http\Controllers\Admin\LayananController;
 
 Route::get('/', function () {
     $opds= OPD::all();
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function() {
     Route::resource('opds', OPDController::class);
+    Route::resource('layanans', LayananController::class);
 });
 
 require __DIR__.'/auth.php';
