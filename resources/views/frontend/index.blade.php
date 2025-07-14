@@ -27,6 +27,17 @@
                         {{ $opd->nama }}
                     </h3>
 
+                    <!-- modal layanan -->
+                    <div id="modalLayanan" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 relative">
+                            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+                            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Layanan</h2>
+                            <div id="modalContent">
+                                <!-- Daftar layanan akan dimuat di sini -->
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="mt-4 text-center">
                         <a href="{{ $opd->link }}" target="_blank" class="inline-block px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                         Kunjungi Situs

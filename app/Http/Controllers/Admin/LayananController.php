@@ -33,13 +33,17 @@ class LayananController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'opd_id' => 'required|exist:opds,id',
+            'opd_id' => 'required|exists:opds,id',
             'nama_layanan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'link' => 'nullable|url'
         ]);
 
-        Layanan::create($request->only(['opd_id', 'nama_layanan', 'deskripsi', 'link']));
+        \App\Models\Layanan::create([
+            'opd_id' => $request->opd_id,
+            'nama_layanan' => $request->nama_layanan,
+            'deskripsi' => $request->deskripsi,
+            'link' => $request->link]);
 
         return redirect()->route('admin.layanans.index')->with('success', 'Layanan berhasil ditambahkan');
     }
@@ -47,35 +51,40 @@ class LayananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $layanan = Layanan::with('opd')->findOrFail($id);
+        return view('admin.layanans.show', compact('layanan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Layanan $layanan)
+    public function edit($id)
     {
+        $layanan = Layanan::findOrFail($id);
         $opds = OPD::all();
+
         return view('admin.layanans.edit', compact('layanan', 'opds'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Layanan $layanan)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'opd_id' => 'required|exist:opds,id',
-            'nama_layanan' => 'required',
-            'deskripsi' => 'nullable',
+            'opd_id' => 'required|exists:opds,id',
+            'nama_layanan' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'link' => 'nullable|url'
         ]);
 
+        $layanan = Layanan::findOrFail($id);
+
         $layanan->update($request->only(['opd_id', 'nama_layanan', 'deskripsi', 'link']));
 
-        return redirect()->route('admin.layanans.index')->with('success', 'Layanan berhasil diperbarui');
+        return redirect()->route('admin.layanans.index')->with('success', 'Layanan berhasil diperbarui.');
     }
 
     /**
