@@ -27,24 +27,73 @@
                         {{ $opd->nama }}
                     </h3>
 
-                    <!-- modal layanan -->
-                    <div id="modalLayanan" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
-                        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 relative">
-                            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
-                            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Layanan</h2>
-                            <div id="modalContent">
-                                <!-- Daftar layanan akan dimuat di sini -->
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="mt-4 text-center">
-                        <a href="{{ $opd->link }}" target="_blank" class="inline-block px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
+                        <a href="{{ $opd->link }}" target="_blank" class="inline-block px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition">
                         Kunjungi Situs
                         </a>
+
+                        <button onclick="openModal('{{ $opd->id }}')"
+                            class="inline-block px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">
+                            Lihat Layanan
+                        </button>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+    <!-- Modal Layanan OPD -->
+    <div id="layananModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-lg font-semibold">Daftar Layanan</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            </div>
+            <div id="layananContent" class="p-4">
+                <!-- Konten layanan dimuat lewat AJAX -->
+                <p class="text-gray-500 text-center">Memuat layanan...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function openModal(opdId) {
+        // Tampilkan modal
+        document.getElementById('layananModal').classList.remove('hidden');
+
+        // Bersihkan isi lama
+        document.getElementById('layananContent').innerHTML = 'Memuat...';
+
+        // Ambil data layanan via AJAX
+        fetch(`/opd/${opdId}/layanans`)
+            .then(response => response.json())
+            .then(data => {
+                let html = '';
+                if (data.length > 0) {
+                    data.forEach(layanan => {
+                        html += `
+                            <div class="mb-4 border-b pb-2">
+                                <h4 class="font-bold text-lg">${layanan.nama_layanan}</h4>
+                                <p class="text-sm text-gray-700">${layanan.deskripsi ?? '-'}</p>
+                                ${layanan.link ? `<a href="${layanan.link}" target="_blank" class="text-blue-600 text-sm underline">Kunjungi</a>` : ''}
+                                <a href="/layanan/${layanan.id}" class="text-indigo-600 text-sm underline">Detail Layanan</a>
+                            </div>
+                        `;
+                    });
+                } else {
+                    html = '<p class="text-sm text-gray-500">Belum ada layanan untuk OPD ini.</p>';
+                }
+                document.getElementById('layananContent').innerHTML = html;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('layananContent').innerHTML = 'Gagal memuat data.';
+            });
+    }
+
+    function closeModal() {
+        document.getElementById('layananModal').classList.add('hidden');
+    }
+    </script>
+
 </x-app-layout>

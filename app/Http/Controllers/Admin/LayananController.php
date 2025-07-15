@@ -95,4 +95,11 @@ class LayananController extends Controller
         $layanan->delete();
         return redirect()->route('admin.layanans.index')->with('success', 'Layanan berhasil dihapus');
     }
+
+    public function getByOpd($id)
+    {
+        $layanans = \App\Models\Layanan::where('opd_id', $id)->get();
+
+        return response()->json($layanans);
+    }
 }
