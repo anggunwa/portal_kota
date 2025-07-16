@@ -14,6 +14,24 @@
                 </p>
         </div>
 
+        <div class="mb-6">
+            <form action="{{ route('home') }}" method="GET" class="flex flex-col sm:flex-row gap-3 items-center justify-center">
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ request('q') }}"
+                    placeholder="Cari layanan atau OPD..."
+                    class="w-full sm:w-80 px-4 py-2 border rounded shadow-sm focus:ring focus:outline-none"
+                >
+                <button
+                    type="submit"
+                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                >
+                    Cari
+                </button>
+            </form>
+        </div>
+        
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
             @foreach ($opds as $opd)
                 <div class="bg-white p-5 shadow-sm rounded-lg border flex flex-col hover:shadow-lg transition duration-200 transform hover:-translate-y-1 justify-between h-64">

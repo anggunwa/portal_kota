@@ -9,6 +9,6 @@ class Layanan extends Model
     protected $fillable = ['opd_id', 'nama_layanan', 'deskripsi', 'link'];
 
     public function opd() {
-        return $this->belongsTo(OPD::class);
+        return $this->belongsTo(OPD::class, 'opd_id');
     }
 }

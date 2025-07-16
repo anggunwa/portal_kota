@@ -12,4 +12,9 @@ class OPD extends Model
     protected $fillable = ['nama', 'slug', 'link', 'logo'];
     protected $table = 'opds';
 
+    public function layanans()
+    {
+        return $this->hasMany(Layanan::class, 'opd_id');
+    }
+
 }
