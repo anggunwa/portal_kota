@@ -9,21 +9,38 @@ use App\Http\Controllers\Admin\LayananController;
 use App\Http\Controllers\LayananDetailController;
 
 Route::get('/', function () {
-    $query = request('q');
-    
-    $opds = \App\Models\OPD::when($query, function ($queryBuilder) use ($query) {
-        $queryBuilder->where('nama', 'like', '%' . $query . '%')
-                     ->orWhereHas('layanans', function ($q) use ($query) {
-                         $q->where('nama_layanan', 'like', '%' . $query . '%');
-                     });
-    })->get();
+    $keyword = request('q');
+
+    $opds = OPD::all();
+    $opds = OPD::where('nama', 'like', "%$keyword%")
+        ->orWhereHas('layanans', function ($query) use ($keyword) {
+            $query->where('nama_layanan', 'like', "%$keyword%")
+                ->orWhere('deskripsi', 'like', "%$keyword%")
+                ->orWhere('link', 'like', "%$keyword%");
+    })
+    ->get();
 
     return view('frontend.index', compact('opds'));
 })->name('home');
 
+// Halaman Tentang
+Route::get('/tentang', function () {
+    return view('frontend.tentang');
+})->name('tentang');
+
+// Halaman Kontak
+Route::get('/kontak', function () {
+    return view('frontend.kontak');
+})->name('kontak');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::view('/', 'welcome')->name('beranda');
+// Route::view('/tentang', 'tentang')->name('tentang');
+// Route::view('/kontak', 'kontak')->name('kontak');
+
 
 Route::get('/layanan/{layanan}', [LayananDetailController::class, 'show'])->name('layanan.show');
 Route::get('/opd/{id}/layanans', [LayananController::class, 'getByOpd']);
