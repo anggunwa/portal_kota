@@ -10,7 +10,7 @@
             <h1 class="text-2xl font-bold text-gray-800 mb-4">{{ $layanan->nama_layanan }}</h1>
         
         @if ($layanan->deskripsi)
-            <p class="text-gray-700 mb-4">{{ $layanan->deskripsi }}</p>
+            <p class="text-gray-700 mb-4">{!! nl2br(e($layanan->deskripsi)) !!}</p>
         @else
             <p class="text-gray-500 italic mb-4">Deskripsi belum tersedia.</p>
         @endif

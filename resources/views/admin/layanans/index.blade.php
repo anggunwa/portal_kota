@@ -37,7 +37,7 @@
                             <td class="px-4 py-2">{{ $index + 1 }}</td>
                             <td class="px-4 py-2">{{ $layanan->nama_layanan }}</td>
                             <td class="px-4 py-2">{{ $layanan->opd->nama ?? "" }}</td>
-                            <td class="px-4 py-2">{{ $layanan->deskripsi }}</td>
+                            <td class="px-4 py-2">{!! nl2br(e($layanan->deskripsi)) !!}</td>
                             <td class="px-4 py-2">
                                 <a href="{{ $layanan->link }}" class="text-blue-500 underline" target="_blank">
                                     {{ $layanan->link }}

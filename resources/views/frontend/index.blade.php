@@ -93,7 +93,7 @@
                             <div class="mb-4 border-b pb-2">
                                 <h4 class="font-bold text-lg">${layanan.nama_layanan}</h4>
                                 <p class="text-sm text-gray-700">${layanan.deskripsi ?? '-'}</p>
-                                ${layanan.link ? `<a href="${layanan.link}" target="_blank" class="text-blue-600 text-sm underline">Kunjungi</a>` : ''}
+                                ${layanan.link ? `<a href="${layanan.link}" target="_blank" class="text-blue-600 text-sm underline">Kunjungi</a>` : ''} |
                                 <a href="/layanan/${layanan.id}" class="text-indigo-600 text-sm underline">Detail Layanan</a>
                             </div>
                         `;

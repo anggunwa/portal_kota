@@ -9,7 +9,7 @@
         <div class="bg-white shadow p-6 rounded-lg">
             <h3 class="text-xl font-semibold mb-4">{{ $layanan->nama_layanan }}</h3>
             <p><strong>OPD:</strong> {{ $layanan->opd->nama ?? '-' }}</p>
-            <p><strong>Deskripsi:</strong> {{ $layanan->deskripsi }}</p>
+            <p><strong>Deskripsi:</strong> {!! nl2br(e($layanan->deskripsi)) !!}</p>
             <p><strong>Link:</strong>
                 @if ($layanan->link)
                     <a href="{{ $layanan->link }}" target="_blank" class="text-blue-500 underline">
