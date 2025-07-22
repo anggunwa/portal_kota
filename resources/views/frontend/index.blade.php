@@ -1,17 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800">Portal Layanan Kota</h2>
+        <h2 class="text-xl font-semibold text-gray-800">Portal Layanan Kota!</h2>
     </x-slot>
 
     <div class="py-10 px-6 max-w-7xl mx-auto">
         <div class="mb-10 text-center">
             <h1 class="text-2xl font-bold mb-2 text-gray-800 leading-relaxed">
                 Selamat datang di Portal Layanan Kota Boyolali.<br>
-                Berikut daftar Organisasi Perangkat Daerah (OPD) di Boyolali:
+                Temukan layanan publik Kabupaten Boyolali dengan cepat dan mudah.
             </h1>
-                <p class="text-gray-600">
-                    Silahkan pilih layanan dari OPD yang tersedia di bawah ini.
-                </p>
         </div>
 
         <div class="mb-6">
@@ -20,8 +17,8 @@
                     type="text"
                     name="q"
                     value="{{ request('q') }}"
-                    placeholder="Cari layanan atau OPD..."
-                    class="w-full sm:w-80 px-4 py-2 border rounded shadow-sm focus:ring focus:outline-none"
+                    placeholder="Cari layanan atau OPD, misal: Akta, Pajak, Disdukcapil..."
+                    class="w-full sm:w-96 px-2 py-2 border rounded shadow-sm focus:ring focus:outline-none"
                 >
                 <button
                     type="submit"
@@ -92,7 +89,7 @@
                         html += `
                             <div class="mb-4 border-b pb-2">
                                 <h4 class="font-bold text-lg">${layanan.nama_layanan}</h4>
-                                <p class="text-sm text-gray-700">${layanan.deskripsi ?? '-'}</p>
+                                <p class="text-sm text-gray-700">${(layanan.deskripsi ?? '-').replace(/\n/g, '<br>')}</p>
                                 ${layanan.link ? `<a href="${layanan.link}" target="_blank" class="text-blue-600 text-sm underline">Kunjungi</a>` : ''} |
                                 <a href="/layanan/${layanan.id}" class="text-indigo-600 text-sm underline">Detail Layanan</a>
                             </div>
