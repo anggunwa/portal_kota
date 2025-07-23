@@ -32,6 +32,7 @@ class OPDController extends Controller
     {
         $request->validate([
             'nama' => 'required',
+            'deskripsi' => 'required|string|max:150',
             'slug' => 'required|unique:opds',
             'link' => 'nullable|url',
             'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
@@ -62,8 +63,9 @@ class OPDController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OPD $opd)
+    public function edit($id)
     {
+        $opd = Opd::findOrFail($id);
         return view('admin.opd.edit', compact('opd'));
     }
 
@@ -74,12 +76,13 @@ class OPDController extends Controller
     {
         $request->validate([
             'nama' => 'required',
+            'deskripsi' => 'required|string|max:150',
             'slug' => 'required|unique:opds,slug,' . $opd->id,
             'link' => 'nullable|url',
             'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = $request->only(['nama', 'slug', 'link']);
+        $data = $request->only(['nama', 'deskripsi','slug', 'link']);
 
         if ($request->hasFile('logo')) {
             // Hapus logo lama jika ada

@@ -7,6 +7,9 @@
             <label>Nama:</label><br>
             <input type="text" name="nama" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" required><br><br>
 
+            <label>Deskripsi Singkat:</label><br>
+            <textarea name="deskripsi" rows="3" maxlength="150" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" required></textarea>
+
             <label>Slug:</label><br>
             <input type="text" name="slug" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" required><br><br>
 

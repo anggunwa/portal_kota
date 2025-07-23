@@ -3,14 +3,18 @@
         <h2 class="text-xl font-semibold text-gray-800">Portal Layanan Kota!</h2>
     </x-slot>
 
-    <div class="py-10 px-6 max-w-7xl mx-auto">
-        <div class="mb-10 text-center">
-            <h1 class="text-2xl font-bold mb-2 text-gray-800 leading-relaxed">
-                Selamat datang di Portal Layanan Kota Boyolali.<br>
-                Temukan layanan publik Kabupaten Boyolali dengan cepat dan mudah.
-            </h1>
+    <section class="relative h-screen bg-cover bg-center" style="background-image: url('/images/boyolali-bg2.jpg')">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+             <div class="text-center text-white px-4">
+                    <h1 class="text-4xl font-extrabold mb-2 leading-relaxed">
+                        Selamat Datang di Portal Layanan Kabupaten Boyolali.<br>
+                        Temukan Layanan Publik Kabupaten Boyolali Dengan Cepat dan Mudah.
+                    </h1>
+             </div>
         </div>
+    </section>
 
+    <div class="py-10 px-6 max-w-7xl mx-auto">
         <div class="mb-6">
             <form action="{{ route('home') }}" method="GET" class="flex flex-col sm:flex-row gap-3 items-center justify-center">
                 <input
@@ -28,6 +32,13 @@
                 </button>
             </form>
         </div>
+
+        <div class="btn-group mb-4" id="filter-buttons">
+            <button class="btn btn-primary active" data-filter="all">SEMUA</button>
+            <button class="btn btn-outline-primary" data-filter="publik">LAYANAN PUBLIK</button>
+            <button class="btn btn-outline-primary" data-filter="admin">LAYANAN ADMINISTRASI</button>
+            <button class="btn btn-outline-primary" data-filter="opd">OPD</button>
+        </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
             @foreach ($opds as $opd)
@@ -41,6 +52,10 @@
                     <h3 class="text-base font-semibold text-center text-gray-800">
                         {{ $opd->nama }}
                     </h3>
+
+                    <p class="text-sm text-gray-600 text-center mt-2 line-clamp-3">
+                        {{ $opd->deskripsi }}
+                    </p>
 
 
                     <div class="mt-4 text-center">

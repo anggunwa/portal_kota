@@ -9,6 +9,7 @@
                 <tr class="bg-gray-100">
                     <th class="px-3 py-2">No</th>
                     <th class="px-3 py-2">Nama</th>
+                    <th class="px-3 py-2">Deskripsi</th>
                     <th class="px-3 py-2">Slug</th>
                     <th class="px-3 py-2">Link</th>
                     <th class="px-3 py-2">Logo</th>
@@ -20,6 +21,7 @@
                     <tr class="text-gray-700">
                         <td class="px-3 py-2">{{ $index + 1 }}</td>
                         <td class="px-3 py-2">{{ $opd->nama }}</td>
+                        <td class="px-3 py-2">{{ Str::limit($opd->deskripsi,80) }}</td>
                         <td class="px-3 py-2">{{ $opd->slug }}</td>
                         <td class="px-3 py-2">
                             <a href="{{ $opd->link }}" class="text-blue-500 hover:underline" target="_blank">{{ $opd->link }}</a>
