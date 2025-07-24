@@ -11,10 +11,17 @@ class OPDController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $opds = OPD::all();
-        return view('admin.opd.index', compact('opds'));
+        $kategori = $request->query('kategori');
+
+        if ($kategori) {
+            $opds = OPD::where('kategori', $kategori)->get();
+        } else {
+            $opds = OPD::all();
+        }
+
+        return view('admin.opd.index', compact('opds', 'kategori'));
     }
 
     /**
@@ -35,10 +42,11 @@ class OPDController extends Controller
             'deskripsi' => 'required|string|max:150',
             'slug' => 'required|unique:opds',
             'link' => 'nullable|url',
+            'kategori' => 'required|string',
             'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = $request->only(['nama', 'slug', 'link']);
+        $data = $request->only(['nama', 'slug', 'link', 'kategori', 'deskripsi']);
 
         if ($request->hasFile('logo')) {
             $file = $request->file('logo');
@@ -79,10 +87,11 @@ class OPDController extends Controller
             'deskripsi' => 'required|string|max:150',
             'slug' => 'required|unique:opds,slug,' . $opd->id,
             'link' => 'nullable|url',
+            'kategori' => 'required|string',
             'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = $request->only(['nama', 'deskripsi','slug', 'link']);
+        $data = $request->only(['nama', 'deskripsi','slug', 'link', 'kategori']);
 
         if ($request->hasFile('logo')) {
             // Hapus logo lama jika ada

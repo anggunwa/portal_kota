@@ -12,6 +12,7 @@
                     <th class="px-3 py-2">Deskripsi</th>
                     <th class="px-3 py-2">Slug</th>
                     <th class="px-3 py-2">Link</th>
+                    <th class="px-3 py-2">Kategori</th>
                     <th class="px-3 py-2">Logo</th>
                     <th class="px-3 py-2">Aksi</th>
                 </tr>
@@ -26,6 +27,7 @@
                         <td class="px-3 py-2">
                             <a href="{{ $opd->link }}" class="text-blue-500 hover:underline" target="_blank">{{ $opd->link }}</a>
                         </td>
+                        <td class="px-3 py-2">{{ $opd->kategori }}</td>
                         <td class="px-3 py-2">
                         <!-- Logo -->
                             @if ($opd->logo)

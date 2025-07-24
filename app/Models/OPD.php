@@ -9,7 +9,7 @@ class OPD extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'deskripsi','slug', 'link', 'logo'];
+    protected $fillable = ['nama', 'deskripsi','slug', 'link', 'kategori', 'logo'];
     protected $table = 'opds';
 
     public function layanans()

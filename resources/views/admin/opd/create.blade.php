@@ -16,6 +16,13 @@
             <label>Link:</label><br>
             <input type="url" name="link" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"><br><br>
 
+            <label>Kategori Organisasi/Layanan:</label><br>
+            <select name="kategori" class="form-select" required>
+                <option value="publik">Layanan Publik</option>
+                <option value="pegawai">Kepegawaian</option>
+                <option value="opd">OPD</option>
+            </select><br><br>
+
             <label>Logo:</label>
             <input type="file" name="logo" accept="image/*"><br><br>
 

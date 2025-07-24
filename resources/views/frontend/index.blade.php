@@ -33,16 +33,16 @@
             </form>
         </div>
 
-        <div class="btn-group mb-4" id="filter-buttons">
-            <button class="btn btn-primary active" data-filter="all">SEMUA</button>
-            <button class="btn btn-outline-primary" data-filter="publik">LAYANAN PUBLIK</button>
-            <button class="btn btn-outline-primary" data-filter="admin">LAYANAN ADMINISTRASI</button>
-            <button class="btn btn-outline-primary" data-filter="opd">OPD</button>
+        <div class="flex flex-wrap justify-center gap-3 mt-6 mb-6" id="filter-button">
+            <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition active" data-filter="semua" data-category="semua">SEMUA</button>
+            <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="publik" data-category="publik">LAYANAN PUBLIK</button>
+            <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="pegawai" data-category="pegawai">KEPEGAWAIAN</button>
+            <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="opd" data-category="opd">OPD</button>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
             @foreach ($opds as $opd)
-                <div class="bg-white p-5 shadow-sm rounded-lg border flex flex-col hover:shadow-lg transition duration-200 transform hover:-translate-y-1 justify-between h-64">
+                <div class="filter-item bg-white p-5 shadow-sm rounded-lg border flex flex-col hover:shadow-lg transition duration-200 transform hover:-translate-y-1 justify-between h-64" data-category="{{ strtolower($opd->kategori) }}">
                         @if ($opd->logo)
                             <img src="{{ asset($opd->logo) }}" alt="{{ $opd->nama }}" class="h-16 max-h-16 object-contain mb-3 mx-auto">
                         @else
@@ -87,6 +87,8 @@
     </div>
 
     <script>
+    
+    // Modal untuk pop up layanan
     function openModal(opdId) {
         // Tampilkan modal
         document.getElementById('layananModal').classList.remove('hidden');
@@ -124,6 +126,60 @@
     function closeModal() {
         document.getElementById('layananModal').classList.add('hidden');
     }
+
+    // JavaScript untuk fungsi tombol kategori
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-button button");
+        const items = document.querySelectorAll(".filter-item");
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                // Atur tombol aktif
+                filterButtons.forEach(btn => btn.classList.remove("btn-primary", "active"));
+                filterButtons.forEach(btn => btn.classList.add("btn-outline-primary"));
+                button.classList.remove("btn-outline-primary");
+                button.classList.add("btn-primary", "active");
+
+                // Ambil filter
+                const filter = button.getAttribute("data-filter");
+
+                // Tampilkan/sembunyikan item
+                items.forEach(item => {
+                    if (filter === "all" || item.dataset.category === filter) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            });
+        });
+    });
+
+    document.querySelectorAll('.filter-button').forEach(button => {
+        button.addEventListener('click', function () {
+            // Menghilangkan active dari semua tombol
+            document.querySelectorAll('.filter-button').forEach(btn => {
+                btn.classList.remove('bg-cyan-400', 'text-black');
+                btn.classList.add('text-black');
+            });
+
+            // Tambahkan active ke tembol yg diklik
+            this.classList.remove('text-cyan-400');
+            this.classList.add('bg-cyan-400', 'text-black');
+
+            // Filter kartu berdasarkan kategori
+            const filter = this.getAttribute('data-filter');
+            document.querySelectorAll('.filter-item').forEach(item => {
+                const category = item.getAttribute('data-category');
+                if (filter === 'all' || category === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    });
+
     </script>
 
 </x-app-layout>

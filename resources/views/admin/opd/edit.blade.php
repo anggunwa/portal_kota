@@ -18,6 +18,13 @@
                 <label>Link:</label><br>
                 <input type="url" name="link" value="{{ $opd->link }}" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"><br><br>
             
+                <label>Kategori Organisasi/Layanan:</label><br>
+                <select name="kategori" id="kategori" class="form-select">
+                    <option value="OPD" {{ $opd->kategori == 'opd' ? 'selected' : '' }}>OPD</option>
+                    <option value="Kepegawaian" {{ $opd->kategori == 'pegawai' ? 'selected' : '' }}>Kepegawaian</option>
+                    <option value="Layanan" {{ $opd->kategori == 'publik' ? 'selected' : '' }}>Layanan Publik</option>
+                </select><br><br>
+
                 <label>Logo Baru:</label>
                 <input type="file" name="logo" accept="image/*"><br><br>
 
