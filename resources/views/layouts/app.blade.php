@@ -40,7 +40,7 @@
             </main>
         </div>
 
-    <footer class="bg-gray-800 text-white mt-16">
+    <footer class="bg-[#3489d2] text-white mt-16">
         <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div>
                 <h3 class="text-lg font-semibold mb-2">Tentang Portal</h3>
@@ -65,7 +65,7 @@
                 </p>
             </div>
         </div>
-        <div class="bg-gray-900 text-center py-4 text-sm text-gray-400">
+        <div class="bg-[#266fad] text-center py-4 text-sm text-white">
             © {{ date('Y') }} Pemerintah Kabupaten Boyolali. All rights reserved.
         </div>
     </footer>

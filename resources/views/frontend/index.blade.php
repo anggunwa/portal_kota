@@ -14,9 +14,9 @@
         </div>
     </section>
 
-    <div class="py-10 px-6 max-w-7xl mx-auto">
+    <div class="py-10 px-6 max-w-7xl mx-auto" id='hasil'>
         <div class="mb-6">
-            <form action="{{ route('home') }}" method="GET" class="flex flex-col sm:flex-row gap-3 items-center justify-center">
+            <form action="/" method="GET" class="flex flex-col sm:flex-row gap-3 items-center justify-center" onsubmit="return redirectWithAnchor();">
                 <input
                     type="text"
                     name="q"
@@ -171,7 +171,7 @@
             const filter = this.getAttribute('data-filter');
             document.querySelectorAll('.filter-item').forEach(item => {
                 const category = item.getAttribute('data-category');
-                if (filter === 'all' || category === filter) {
+                if (filter === 'semua' || category === filter) {
                     item.classList.remove('hidden');
                 } else {
                     item.classList.add('hidden');
@@ -179,6 +179,14 @@
             });
         });
     });
+
+    // Supaya setelah search halaman tidak scroll ke posisi halaman atas
+    function redirectWithAnchor() {
+        const form = event.target;
+        const query = new URLSearchParams(new FormData(form)).toString();
+        window.location.href = `/?${query}#hasil`;
+        return false; // Hindari form submit default
+    }
 
     </script>
 

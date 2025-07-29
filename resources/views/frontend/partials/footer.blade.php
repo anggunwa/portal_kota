@@ -23,7 +23,7 @@
                 </p>
             </div>
         </div>
-        <div class="bg-gray-900 text-center py-4 text-sm text-gray-400">
+        <div class="bg-[#266fad] text-center py-4 text-sm text-white">
             © {{ date('Y') }} Pemerintah Kabupaten Boyolali. All rights reserved.
         </div>
     </footer>

@@ -12,7 +12,7 @@ Route::get('/', function () {
     $keyword = request('q');
 
     $opds = OPD::all();
-    $opds = OPD::where('nama', 'like', "%$keyword%")
+    $opds = OPD::where('nama', 'like', "%$keyword%")->orWhere('deskripsi', 'like', "%$keyword%")
         ->orWhereHas('layanans', function ($query) use ($keyword) {
             $query->where('nama_layanan', 'like', "%$keyword%")
                 ->orWhere('deskripsi', 'like', "%$keyword%")
