@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Layanan Kota</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@formkit/auto-animate@1"></script>
 </head>
-<body class="bg-gray-100 font-sans antialiased">
+<body class="bg-[#f3f4f6] font-sans antialiased">
     
     <div class="max-w-7xl mx-auto py-10 px-4">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Portal Layanan Kota</h1>

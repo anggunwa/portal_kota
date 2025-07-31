@@ -3,7 +3,7 @@
         <h2 class="text-xl font-semibold text-gray-800">Portal Layanan Kota!</h2>
     </x-slot>
 
-    <section class="relative h-screen bg-cover bg-center" style="background-image: url('/images/boyolali-bg2.jpg')">
+    <section class="relative h-screen bg-cover bg-center" style="background-image: url('/images/dunia3.jpg')">
         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
              <div class="text-center text-white px-4">
                     <h1 class="text-4xl font-extrabold mb-2 leading-relaxed">
@@ -27,8 +27,13 @@
                 <button
                     type="submit"
                     class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                >
+                    >
                     Cari
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+                    </svg>
                 </button>
             </form>
         </div>
@@ -40,9 +45,9 @@
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="opd" data-category="opd">OPD</button>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
+        <div id="cards-wrapper" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
             @foreach ($opds as $opd)
-                <div class="filter-item bg-white p-5 shadow-sm rounded-lg border flex flex-col hover:shadow-lg transition duration-200 transform hover:-translate-y-1 justify-between h-64" data-category="{{ strtolower($opd->kategori) }}">
+                <div class="filter-item duration-500 ease-in-out opacity-100 scale-100 bg-white p-5 shadow-sm rounded-lg border flex flex-col hover:shadow-lg transition duration-200 transform hover:-translate-y-1 justify-between h-64" data-category="{{ strtolower($opd->kategori) }}">
                         @if ($opd->logo)
                             <img src="{{ asset($opd->logo) }}" alt="{{ $opd->nama }}" class="h-16 max-h-16 object-contain mb-3 mx-auto">
                         @else
@@ -146,39 +151,45 @@
                 // Tampilkan/sembunyikan item
                 items.forEach(item => {
                     if (filter === "all" || item.dataset.category === filter) {
-                        item.style.display = "block";
+                        item.classList.remove('hidden');
                     } else {
-                        item.style.display = "none";
+                        item.classList.add('hidden');
                     }
                 });
             });
         });
     });
 
-    document.querySelectorAll('.filter-button').forEach(button => {
-        button.addEventListener('click', function () {
-            // Menghilangkan active dari semua tombol
-            document.querySelectorAll('.filter-button').forEach(btn => {
-                btn.classList.remove('bg-cyan-400', 'text-black');
-                btn.classList.add('text-black');
-            });
+    // Transisi tiap ganti kategori
+        document.querySelectorAll('.filter-button').forEach(button => {
+            button.addEventListener('click', function () {
+                document.querySelectorAll('.filter-button').forEach(btn => {
+                    btn.classList.remove('bg-cyan-400');
+                });
+                this.classList.add('bg-cyan-400');
 
-            // Tambahkan active ke tembol yg diklik
-            this.classList.remove('text-cyan-400');
-            this.classList.add('bg-cyan-400', 'text-black');
+                const filter = this.getAttribute('data-filter');
 
-            // Filter kartu berdasarkan kategori
-            const filter = this.getAttribute('data-filter');
-            document.querySelectorAll('.filter-item').forEach(item => {
-                const category = item.getAttribute('data-category');
-                if (filter === 'semua' || category === filter) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
+                document.querySelectorAll('.filter-item').forEach(item => {
+                    const category = item.getAttribute('data-category');
+
+                    if (filter === 'semua' || category === filter) {
+                        setTimeout(() => {
+                            item.classList.remove('hidden');
+                            item.classList.remove('opacity-0', 'scale-95');
+                            item.classList.add('opacity-100', 'scale-100');
+                        }, 10);
+                    } else {
+                        item.classList.remove('opacity-100', 'scale-100');
+                        item.classList.add('opacity-0', 'scale-95');
+
+                        setTimeout(() => {
+                            item.classList.add('hidden');
+                        }, 300);
+                    }
+                });
             });
         });
-    });
 
     // Supaya setelah search halaman tidak scroll ke posisi halaman atas
     function redirectWithAnchor() {
@@ -187,7 +198,6 @@
         window.location.href = `/?${query}#hasil`;
         return false; // Hindari form submit default
     }
-
     </script>
 
 </x-app-layout>
