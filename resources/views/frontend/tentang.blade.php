@@ -9,7 +9,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
                 <p class="text-gray-700 text-lg leading-relaxed mb-4">
-                    Portal Layanan Kota Boyolali merupakan sistem terintegrasi yang dirancang untuk memudahkan masyarakat dalam mengakses informasi dan layanan publik dari berbagai Organisasi Perangkat Daerah (OPD).
+                    Portal Layanan Kabupaten Boyolali merupakan sistem terintegrasi yang dirancang untuk memudahkan masyarakat dalam mengakses informasi dan layanan publik dari berbagai Organisasi Perangkat Daerah (OPD).
                 </p>
 
                 <p class="text-gray-700 text-lg leading-relaxed mb-4">

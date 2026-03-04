@@ -3,7 +3,7 @@
             <div>
                 <h3 class="text-lg font-semibold mb-2">Tentang Portal</h3>
                 <p class="text-sm text-gray-300">
-                    Portal Layanan Kota Boyolali menyatukan berbagai layanan publik dalam satu tempat untuk kemudahan akses masyarakat.
+                    Portal Layanan Kabupaten Boyolali menyatukan berbagai layanan publik dan administrasi pemerintahan dalam satu tempat untuk kemudahan akses masyarakat.
                 </p>
             </div>
             <div>

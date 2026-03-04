@@ -3,7 +3,7 @@
         <h2 class="text-xl font-semibold text-gray-800">Portal Layanan Kota!</h2>
     </x-slot>
 
-    <section class="relative h-screen bg-cover bg-center" style="background-image: url('/images/dunia3.jpg')">
+    <section class="relative h-screen bg-cover bg-center" style="background-image: url('/images/kantorbupati1.jpg')">
         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
              <div class="text-center text-white px-4">
                     <h1 class="text-4xl font-extrabold mb-2 leading-relaxed">
