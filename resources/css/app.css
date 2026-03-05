@@ -17,3 +17,206 @@
 [data-auto-animate] > * {
     animation: fadeInUp 0.4s ease-in-out;
 }
+
+/* From Uiverse.io by themrsami */ 
+.search-container {
+  position: relative;
+  width: 290px;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #2563eb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-icon svg {
+  fill: #fff;
+}
+
+.search-icon:hover {
+  background-color: #1d4ed8;
+}
+
+.search-bar:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.search-bar:focus-within {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 200%;
+  border-radius: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+  transition: all 0.5s ease;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: -1;
+}
+
+.search-bar:hover + .glow {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.search-bar:focus-within + .glow {
+  transform: translate(-50%, -50%) scale(1.2);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+}
+
+
+/* SEARCH BAR V3 */
+.search-containerV3 {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-containerV3 input {
+    width: 100%;
+    padding: 14px 60px 14px 20px;
+    border-radius: 999px;
+    border: none;
+    outline: none;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    font-size: 16px;
+}
+
+.search-containerV3 button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: #1e3a8a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* hover */
+.search-containerV3 button:hover{
+    background:#1e40af;
+}
+
+/* Mobile optimization */
+@media (max-width: 640px){
+
+    .search-containerV3 input{
+        padding: 12px 55px 12px 18px;
+        font-size:14px;
+    }
+
+    .search-containerV3 button{
+        width:38px;
+        height:38px;
+    }
+
+}
+
+/* TOMBOL KATEGORI */
+.kategori-wrapper{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+/* container scroll */
+.kategori-slider{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding:10px;
+}
+
+/* sembunyikan scrollbar */
+.kategori-slider::-webkit-scrollbar{
+    display:none;
+}
+
+/* card */
+.kategori-card{
+    min-width:260px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+    border-radius:16px;
+    background:#f3f4f6;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* tombol panah */
+.slider-btn{
+    position:absolute;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    background:white;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
+    cursor:pointer;
+    z-index:10;
+}
+
+.slider-btn.left{
+    left:-10px;
+}
+
+.slider-btn.right{
+    right:-10px;
+}
+
+@media (min-width:1024px){
+
+    .kategori-slider{
+        flex-wrap:wrap;
+        overflow:visible;
+    }
+
+    .slider-btn{
+        display:none;
+    }
+
+}

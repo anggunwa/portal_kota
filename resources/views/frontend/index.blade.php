@@ -15,34 +15,118 @@
     </section>
 
     <div class="py-10 px-6 max-w-7xl mx-auto" id='hasil'>
-        <div class="mb-6">
-            <form action="/" method="GET" class="flex flex-col sm:flex-row gap-3 items-center justify-center" onsubmit="return redirectWithAnchor();">
-                <input
-                    type="text"
-                    name="q"
-                    value="{{ request('q') }}"
-                    placeholder="Cari layanan atau OPD, misal: Akta, Pajak, Disdukcapil..."
-                    class="w-full sm:w-96 px-2 py-2 border rounded shadow-sm focus:ring focus:outline-none"
-                >
-                <button
-                    type="submit"
-                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                    >
-                    Cari
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
-                    </svg>
-                </button>
-            </form>
+
+    <!-- SEARCH BAR V1 -->
+        <div class="mb-6 px-4">
+    <form action="/" method="GET"
+        class="flex flex-col sm:flex-row gap-3 items-center justify-center"
+        onsubmit="return redirectWithAnchor();">
+
+        <div class="search-containerV3 w-full sm:w-96">
+            <input 
+                type="text"
+                name="q"
+                value="{{ request('q') }}"
+                placeholder="Telusuri layanan di sini"
+                class="w-full"
+            >
+
+            <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     height="22"
+                     viewBox="0 0 24 24"
+                     width="22">
+                    <path fill="none" d="M0 0h24v24H0z"/>
+                    <path
+                        fill="white"
+                        d="M15.5 14h-.79l-.28-.27C15.41
+                        12.59 16 11.11 16 9.5 16 5.91
+                        13.09 3 9.5 3S3 5.91 3 9.5
+                        5.91 16 9.5 16c1.61 0 3.09-.59
+                        4.23-1.57l.27.28v.79l5
+                        4.99L20.49 19l-4.99-5zM9.5
+                        14C7.01 14 5 11.99 5
+                        9.5S7.01 5 9.5 5 14
+                        7.01 14 9.5 11.99 14
+                        9.5 14z"/>
+                </svg>
+            </button>
+
         </div>
 
+    </form>
+</div>
+
+        <!-- SEARCH BAR V2 -->
+        <div class="mb-6">
+
+        </div>
+
+    <!-- SEACRH BAR V1 -->
+     <!-- <input
+        type="text"
+        name="q"
+        value="{{ request('q') }}"
+        placeholder="Cari layanan atau OPD, misal: Akta, Pajak, Disdukcapil..."
+        class="w-full sm:w-96 px-2 py-2 border rounded shadow-sm focus:ring focus:outline-none"
+    >
+    <button
+        type="submit"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+        Cari
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+        </svg>
+    </button> -->
+
+        <!-- TOMBOL KATEGORI V1 -->
         <div class="flex flex-wrap justify-center gap-3 mt-6 mb-6" id="filter-button">
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition active" data-filter="semua" data-category="semua">SEMUA</button>
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="publik" data-category="publik">LAYANAN PUBLIK</button>
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="pegawai" data-category="pegawai">KEPEGAWAIAN</button>
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="opd" data-category="opd">OPD</button>
+        </div>
+
+        <!-- TOMBOL KATEGORI V2 -->
+        <div class="kategori-wrapper justify-center mt-6 mb-6">
+
+            <!-- tombol kiri -->
+            <button class="slider-btn left" onclick="scrollKategori(-1)">
+                &#10094;
+            </button>
+
+            <!-- container scroll -->
+            <div class="kategori-slider" id="kategoriSlider">
+
+                <button class="kategori-card hover:bg-gray-300">
+                    <img src="icon1.png">
+                    <span>SEMUA</span>
+                </button>
+
+                <button class="kategori-card hover:bg-gray-300">
+                    <img src="icon2.png">
+                    <span>LAYANAN PUBLIK</span>
+                </button>
+
+                <button class="kategori-card hover:bg-gray-300">
+                    <img src="icon3.png">
+                    <span>LAYANAN ADMINISTRASI</span>
+                </button>
+
+                <button class="kategori-card hover:bg-gray-300">
+                    <img src="icon4.png">
+                    <span>OPD</span>
+                </button>
+            </div>
+
+            <!-- tombol kanan -->
+            <button class="slider-btn right" onclick="scrollKategori(1)">
+                &#10095;
+            </button>
+
         </div>
         
         <div id="cards-wrapper" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
@@ -198,6 +282,22 @@
         window.location.href = `/?${query}#hasil`;
         return false; // Hindari form submit default
     }
+
+    function scrollKategori(direction){
+
+        const container = document.getElementById("kategoriSlider");
+
+        const scrollAmount = 300;
+
+        container.scrollBy({
+            left: direction * scrollAmount,
+            behavior: "smooth"
+        });
+
+    }
+
     </script>
+
+    
 
 </x-app-layout>
