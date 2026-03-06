@@ -3,10 +3,10 @@
         <h2 class="text-xl font-semibold text-gray-800">Portal Layanan Kota!</h2>
     </x-slot>
 
-    <section class="relative h-screen bg-cover bg-center" style="background-image: url('/images/kantorbupati1.jpg')">
+    <section class="h-96 relative md:h-screen bg-cover bg-center" style="background-image: url('/images/kantorbupati1.jpg')">
         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
              <div class="text-center text-white px-4">
-                    <h1 class="text-4xl font-extrabold mb-2 leading-relaxed">
+                    <h1 class="text-xl font-extrabold mb-2 leading-relaxed md:text-4xl">
                         Selamat Datang di Portal Layanan Kabupaten Boyolali.<br>
                         Temukan Layanan Publik Kabupaten Boyolali Dengan Cepat dan Mudah.
                     </h1>
@@ -18,49 +18,49 @@
 
     <!-- SEARCH BAR V1 -->
         <div class="mb-6 px-4">
-    <form action="/" method="GET"
-        class="flex flex-col sm:flex-row gap-3 items-center justify-center"
-        onsubmit="return redirectWithAnchor();">
+            <form action="/" method="GET"
+                class="flex flex-col sm:flex-row gap-3 items-center justify-center"
+                onsubmit="return redirectWithAnchor();">
 
-        <div class="search-containerV3 w-full sm:w-96">
-            <input 
-                type="text"
-                name="q"
-                value="{{ request('q') }}"
-                placeholder="Telusuri layanan di sini"
-                class="w-full"
-            >
+                <div class="font-extrabold text-xl md:text-3xl mr-8">
+                    Layanan apa yang anda cari?
+                </div>
 
-            <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     height="22"
-                     viewBox="0 0 24 24"
-                     width="22">
-                    <path fill="none" d="M0 0h24v24H0z"/>
-                    <path
-                        fill="white"
-                        d="M15.5 14h-.79l-.28-.27C15.41
-                        12.59 16 11.11 16 9.5 16 5.91
-                        13.09 3 9.5 3S3 5.91 3 9.5
-                        5.91 16 9.5 16c1.61 0 3.09-.59
-                        4.23-1.57l.27.28v.79l5
-                        4.99L20.49 19l-4.99-5zM9.5
-                        14C7.01 14 5 11.99 5
-                        9.5S7.01 5 9.5 5 14
-                        7.01 14 9.5 11.99 14
-                        9.5 14z"/>
-                </svg>
-            </button>
+                <div class="search-containerV3 w-full sm:w-96">
+                    <input 
+                        type="text"
+                        name="q"
+                        value="{{ request('q') }}"
+                        placeholder="Telusuri layanan di sini"
+                        class="w-full"
+                    >
 
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            width="22">
+                            <path fill="none" d="M0 0h24v24H0z"/>
+                            <path
+                                fill="white"
+                                d="M15.5 14h-.79l-.28-.27C15.41
+                                12.59 16 11.11 16 9.5 16 5.91
+                                13.09 3 9.5 3S3 5.91 3 9.5
+                                5.91 16 9.5 16c1.61 0 3.09-.59
+                                4.23-1.57l.27.28v.79l5
+                                4.99L20.49 19l-4.99-5zM9.5
+                                14C7.01 14 5 11.99 5
+                                9.5S7.01 5 9.5 5 14
+                                7.01 14 9.5 11.99 14
+                                9.5 14z"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </form>
         </div>
 
-    </form>
-</div>
-
-        <!-- SEARCH BAR V2 -->
-        <div class="mb-6">
-
-        </div>
 
     <!-- SEACRH BAR V1 -->
      <!-- <input
@@ -83,12 +83,12 @@
     </button> -->
 
         <!-- TOMBOL KATEGORI V1 -->
-        <div class="flex flex-wrap justify-center gap-3 mt-6 mb-6" id="filter-button">
+        <!-- <div class="flex flex-wrap justify-center gap-3 mt-6 mb-6" id="filter-button">
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition active" data-filter="semua" data-category="semua">SEMUA</button>
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="publik" data-category="publik">LAYANAN PUBLIK</button>
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="pegawai" data-category="pegawai">KEPEGAWAIAN</button>
             <button class="filter-button px-4 py-2 border-2 border-cyan-400 text-black font-semibold rounded hover:bg-cyan-400 hover:text-black transition" data-filter="opd" data-category="opd">OPD</button>
-        </div>
+        </div> -->
 
         <!-- TOMBOL KATEGORI V2 -->
         <div class="kategori-wrapper justify-center mt-6 mb-6">
@@ -99,25 +99,25 @@
             </button>
 
             <!-- container scroll -->
-            <div class="kategori-slider" id="kategoriSlider">
+            <div class="kategori-slider flex overflow-x-auto scroll-smooth gap-4" id="kategoriSlider">
 
-                <button class="kategori-card hover:bg-gray-300">
-                    <img src="icon1.png">
+                <button class="filter-button kategori-card hover:bg-gray-300 active" data-filter="semua" data-category="semua">
+                    <img src="images/semua.png" class="h-12 w-12 object-contain">
                     <span>SEMUA</span>
                 </button>
 
-                <button class="kategori-card hover:bg-gray-300">
-                    <img src="icon2.png">
+                <button class="filter-button kategori-card hover:bg-gray-300" data-filter="publik" data-category="publik">
+                    <img src="images/publik.png" class="h-12 w-12 object-contain">
                     <span>LAYANAN PUBLIK</span>
                 </button>
 
-                <button class="kategori-card hover:bg-gray-300">
-                    <img src="icon3.png">
+                <button class="filter-button kategori-card hover:bg-gray-300" data-filter="pegawai" data-category="pegawai">
+                    <img src="images/administrasi.png" class="h-12 w-12 object-contain">
                     <span>LAYANAN ADMINISTRASI</span>
                 </button>
 
-                <button class="kategori-card hover:bg-gray-300">
-                    <img src="icon4.png">
+                <button class="filter-button kategori-card hover:bg-gray-300" data-filter="opd" data-category="opd">
+                    <img src="images/opd.png" class="h-12 w-12 object-contain">
                     <span>OPD</span>
                 </button>
             </div>
@@ -128,10 +128,12 @@
             </button>
 
         </div>
+
+        <div class="text-xl md:text-2xl text-center mb-6 font-bold">Jelajahi Layanan di Kabupaten Boyolali</div>
         
         <div id="cards-wrapper" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
             @foreach ($opds as $opd)
-                <div class="filter-item duration-500 ease-in-out opacity-100 scale-100 bg-white p-5 shadow-sm rounded-lg border flex flex-col hover:shadow-lg transition duration-200 transform hover:-translate-y-1 justify-between h-64" data-category="{{ strtolower($opd->kategori) }}">
+                <div class="filter-item duration-500 ease-in-out opacity-100 scale-100 bg-white p-5 shadow-md rounded-xl border flex flex-col hover:shadow-lg transition duration-200 transform hover:-translate-y-1 justify-between h-64" data-category="{{ strtolower($opd->kategori) }}">
                         @if ($opd->logo)
                             <img src="{{ asset($opd->logo) }}" alt="{{ $opd->nama }}" class="h-16 max-h-16 object-contain mb-3 mx-auto">
                         @else
@@ -283,11 +285,12 @@
         return false; // Hindari form submit default
     }
 
+    // Scroll Kategori
     function scrollKategori(direction){
 
         const container = document.getElementById("kategoriSlider");
 
-        const scrollAmount = 300;
+        const scrollAmount = 150;
 
         container.scrollBy({
             left: direction * scrollAmount,
