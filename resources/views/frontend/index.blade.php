@@ -16,7 +16,7 @@
 
     <div class="py-10 px-6 max-w-7xl mx-auto" id='hasil'>
 
-    <!-- SEARCH BAR V1 -->
+    <!-- SEARCH BAR V3 -->
         <div class="mb-6 px-4">
             <form action="/" method="GET"
                 class="flex flex-col sm:flex-row gap-3 items-center justify-center"
@@ -103,22 +103,30 @@
 
                 <button class="filter-button kategori-card hover:bg-gray-300 active" data-filter="semua" data-category="semua">
                     <img src="images/semua.png" class="h-12 w-12 object-contain">
-                    <span>SEMUA</span>
+                    <span>
+                        SEMUA <span class="count">(0)</span>
+                    </span>
                 </button>
 
-                <button class="filter-button kategori-card hover:bg-gray-300" data-filter="publik" data-category="publik">
+                <button class="filter-button kategori-card hover:bg-gray-300 service-card" data-filter="publik" data-category="publik">
                     <img src="images/publik.png" class="h-12 w-12 object-contain">
-                    <span>LAYANAN PUBLIK</span>
+                    <span>
+                        LAYANAN PUBLIK <span class="count">(0)</span>
+                    </span>
                 </button>
 
-                <button class="filter-button kategori-card hover:bg-gray-300" data-filter="pegawai" data-category="pegawai">
+                <button class="filter-button kategori-card hover:bg-gray-300 service-card" data-filter="pegawai" data-category="pegawai">
                     <img src="images/administrasi.png" class="h-12 w-12 object-contain">
-                    <span>LAYANAN ADMINISTRASI</span>
+                    <span>
+                        LAYANAN ADMINISTRASI <span class="count">(0)</span>
+                    </span>
                 </button>
 
-                <button class="filter-button kategori-card hover:bg-gray-300" data-filter="opd" data-category="opd">
+                <button class="filter-button kategori-card hover:bg-gray-300 service-card" data-filter="opd" data-category="opd">
                     <img src="images/opd.png" class="h-12 w-12 object-contain">
-                    <span>OPD</span>
+                    <span>
+                        OPD <span class="count">(0)</span>
+                    </span>
                 </button>
             </div>
 
@@ -220,7 +228,7 @@
 
     // JavaScript untuk fungsi tombol kategori
     document.addEventListener("DOMContentLoaded", function () {
-        const filterButtons = document.querySelectorAll(".filter-button button");
+        const filterButtons = document.querySelectorAll(".filter-button");
         const items = document.querySelectorAll(".filter-item");
 
         filterButtons.forEach(button => {
@@ -285,7 +293,7 @@
         return false; // Hindari form submit default
     }
 
-    // Scroll Kategori
+    // Scroll Kategori Kesamping
     function scrollKategori(direction){
 
         const container = document.getElementById("kategoriSlider");
@@ -298,6 +306,75 @@
         });
 
     }
+
+    // Counter jumlah layanan per kategori
+    document.addEventListener("DOMContentLoaded", function () {
+
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const items = document.querySelectorAll(".filter-item");
+
+    function updateCounter(){
+
+        const counts = {
+            semua: 0,
+            publik: 0,
+            pegawai: 0,
+            opd: 0
+        };
+
+        items.forEach(item => {
+
+            const category = item.dataset.category;
+
+            counts.semua++;
+
+            if(counts[category] !== undefined){
+                counts[category]++;
+            }
+
+        });
+
+        filterButtons.forEach(button => {
+
+            const category = button.dataset.category;
+
+            const counter = button.querySelector(".count");
+
+            if(counter){
+                counter.textContent = "(" + counts[category] + ")";
+            }
+
+        });
+
+    }
+
+        filterButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                // tombol aktif
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                const filter = button.dataset.filter;
+
+                items.forEach(item => {
+
+                    if(filter === "semua" || item.dataset.category === filter){
+                        item.classList.remove("hidden");
+                    }else{
+                        item.classList.add("hidden");
+                    }
+
+                });
+
+            });
+
+        });
+
+    updateCounter();
+
+    });
 
     </script>
 
